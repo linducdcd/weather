@@ -8,20 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		FF1E7CF3227BC2EA002378B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1E7CF2227BC2EA002378B2 /* AppDelegate.swift */; };
-		FF1E7CF5227BC2EA002378B2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1E7CF4227BC2EA002378B2 /* ViewController.swift */; };
+		FF1E7CF5227BC2EA002378B2 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1E7CF4227BC2EA002378B2 /* WeatherViewController.swift */; };
 		FF1E7CF8227BC2EA002378B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF1E7CF6227BC2EA002378B2 /* Main.storyboard */; };
 		FF1E7CFA227BC2EC002378B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF1E7CF9227BC2EC002378B2 /* Assets.xcassets */; };
 		FF1E7CFD227BC2EC002378B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF1E7CFB227BC2EC002378B2 /* LaunchScreen.storyboard */; };
+		FF924F25227BE90B002AC66E /* ChangeCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF924F24227BE90B002AC66E /* ChangeCityViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		FF1E7CEF227BC2EA002378B2 /* weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF1E7CF2227BC2EA002378B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FF1E7CF4227BC2EA002378B2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FF1E7CF4227BC2EA002378B2 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		FF1E7CF7227BC2EA002378B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FF1E7CF9227BC2EC002378B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FF1E7CFC227BC2EC002378B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FF1E7CFE227BC2EC002378B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF924F24227BE90B002AC66E /* ChangeCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeCityViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +56,23 @@
 		FF1E7CF1227BC2EA002378B2 /* weather */ = {
 			isa = PBXGroup;
 			children = (
-				FF1E7CF2227BC2EA002378B2 /* AppDelegate.swift */,
-				FF1E7CF4227BC2EA002378B2 /* ViewController.swift */,
+				FF924F26227BE953002AC66E /* Controller */,
 				FF1E7CF6227BC2EA002378B2 /* Main.storyboard */,
 				FF1E7CF9227BC2EC002378B2 /* Assets.xcassets */,
 				FF1E7CFB227BC2EC002378B2 /* LaunchScreen.storyboard */,
 				FF1E7CFE227BC2EC002378B2 /* Info.plist */,
 			);
 			path = weather;
+			sourceTree = "<group>";
+		};
+		FF924F26227BE953002AC66E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FF1E7CF2227BC2EA002378B2 /* AppDelegate.swift */,
+				FF924F24227BE90B002AC66E /* ChangeCityViewController.swift */,
+				FF1E7CF4227BC2EA002378B2 /* WeatherViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,8 +146,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF1E7CF5227BC2EA002378B2 /* ViewController.swift in Sources */,
+				FF1E7CF5227BC2EA002378B2 /* WeatherViewController.swift in Sources */,
 				FF1E7CF3227BC2EA002378B2 /* AppDelegate.swift in Sources */,
+				FF924F25227BE90B002AC66E /* ChangeCityViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,7 +293,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y94424F9N3;
+				DEVELOPMENT_TEAM = 69A2X4F4L8;
 				INFOPLIST_FILE = weather/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -299,7 +311,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y94424F9N3;
+				DEVELOPMENT_TEAM = 69A2X4F4L8;
 				INFOPLIST_FILE = weather/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
