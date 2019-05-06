@@ -18,8 +18,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     let WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather"
     let APP_ID = "90a5849f06a81d362534fa5f3f06fc87"
     
-    
+    //TODO: Declaree instance constantes
     let locationManager = CLLocationManager()
+    let weatherDataModel = WeatherDataModel()
     
     
     
@@ -34,9 +35,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
         //TODO: Set location manager here
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,23 +51,60 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     //Write getWaetherData
     func getWaetherData(url: String, parameters: [String : String]) {
         //MARK: - Using Alamofare
-        Alamofire.request("WEATHER_URL").responseJSON { response in
-            print("Request: \(String(describing: response.request))")   // original url request
-            print("Response: \(String(describing: response.response))") // http url response
-            print("Result: \(response.result)")                         // response serialization result
-            
-            if let json = response.result.value {
-                print("JSON: \(json)") // serialized json response
+        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
+           
+            if response.result.isSuccess {
+                print("Success! Got the weather data")
+                
+                
+                
+            let weatherJason = JSON(response.result.value!)
+                
+                print(weatherJason)
+                
+                self.updateWeatherData(jason: weatherJason)
+                self.updateUIWeatherData()
+                
+                
+                
+            } else {
+                
+                print("Error \(String(describing: response.result.error))")
+                
+                self.cityLabal.text = "Connection Issues"
             }
             
-            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                print("Data: \(utf8Text)") // original server data as UTF8 string
-            }
+            
+            
         }
         
     }
     
+    //write updateWeatherData function
+    func updateWeatherData (jason : JSON) {
+        if   let tempResult = jason ["main"]["temp"].double{
+        weatherDataModel.temperature = tempResult - 273.15
+        
+        weatherDataModel.city = jason["name"].stringValue
+        
+        weatherDataModel.condition = jason["weather"][0]["id"].intValue
+        weatherDataModel.weatherIconName = weatherDataModel.updateWeatherIcon(condition: weatherDataModel.condition)
+        } else {
+            cityLabal.text = "weather Unavalable"
+            
+        }
+    }
     
+    
+    //MARK: - UI Update
+    
+    //Write The updateUIWithWeatherData method:
+    
+    func updateUIWeatherData() {
+        cityLabal.text = weatherDataModel.city
+        temperatureLabal.text = "\(weatherDataModel.temperature)"
+        weatherIcon.image = UIImage(named: weatherDataModel.weatherIconName)
+    }
     
     
     //Write the didUpdate method
@@ -75,8 +114,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         if location.horizontalAccuracy > 0 {
             locationManager.stopUpdatingLocation()
+            locationManager.delegate = nil
             
-            print("longitude = \(location.coordinate.longitude), latitude = \(location.coordinate.latitude)")
             
             let latitude = String(location.coordinate.latitude)
             let longitude = String(location.coordinate.longitude)
@@ -85,10 +124,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 
             getWaetherData(url: WEATHER_URL, parameters: params)
             
+            print("longitude = \(location.coordinate.longitude), latitude = \(location.coordinate.latitude)")
+            
+
         }
     }
     
-    //Write the didFaildWithEroro metode
+    //Write the didFaildWithError metode
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
         cityLabal.text = "Location Unavailable"
