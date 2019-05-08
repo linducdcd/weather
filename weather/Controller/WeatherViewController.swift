@@ -106,7 +106,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, changeCityDel
     
     func updateUIWeatherData() {
         cityLabal.text = weatherDataModel.city
-        temperatureLabal.text = "\(weatherDataModel.temperature)"
+        temperatureLabal.text = "\(weatherDataModel.temperature)°"
         weatherIcon.image = UIImage(named: weatherDataModel.weatherIconName)
     }
     
@@ -143,6 +143,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, changeCityDel
     
     func userEnteredANewCity(city: String) {
         print(city)
+        let params : [String:String] = ["q" : city , "appid" : APP_ID]
+        
+        getWaetherData(url: WEATHER_URL, parameters: params)
     }
 
     //Write the prepareForSegue Methode
