@@ -51,6 +51,10 @@
                                 <rect key="frame" x="298" y="20" width="61" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="switch"/>
+                                <connections>
+                                    <action selector="switchToCityView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HTh-ej-A7q"/>
+                                    <segue destination="8dR-Gq-TVu" kind="presentation" identifier="changCityName" id="Jdi-fu-rTa"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -60,17 +64,16 @@
                         <outlet property="cityLabal" destination="O8x-9V-ZJx" id="HTY-TK-nQY"/>
                         <outlet property="temperatureLabal" destination="mBJ-32-s8g" id="l5A-WH-AXr"/>
                         <outlet property="weatherIcon" destination="HDo-ZU-lqr" id="Vhe-49-oFT"/>
-                        <segue destination="8dR-Gq-TVu" kind="show" identifier="cityPage" id="YbL-Tk-4pk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="117.59999999999999" y="118.29085457271366"/>
         </scene>
-        <!--View Controller-->
+        <!--Change City View Controller-->
         <scene sceneID="l7B-co-lGN">
             <objects>
-                <viewController id="8dR-Gq-TVu" sceneMemberID="viewController">
+                <viewController id="8dR-Gq-TVu" customClass="ChangeCityViewController" customModule="weather" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KIL-fJ-MpZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -79,7 +82,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="241-jy-Bru">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="getWeather" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="241-jy-Bru">
                                 <rect key="frame" x="93" y="323" width="189" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
@@ -87,6 +90,8 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
+                                    <action selector="backButtom:" destination="8dR-Gq-TVu" eventType="touchUpInside" id="P7n-l1-U5T"/>
+                                    <action selector="getWeatherPressed:" destination="8dR-Gq-TVu" eventType="touchUpInside" id="4ex-qe-R6S"/>
                                     <action selector="getWeatherPressed:" destination="I33-UP-vuR" eventType="touchUpInside" id="KWl-Mx-kMg"/>
                                 </connections>
                             </button>
@@ -94,6 +99,9 @@
                                 <rect key="frame" x="16" y="0.0" width="51" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="backButton"/>
+                                <connections>
+                                    <action selector="backButtom:" destination="8dR-Gq-TVu" eventType="touchUpInside" id="N34-zj-WYA"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Enter City Name" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Yx-a1-gAC">
                                 <rect key="frame" x="73" y="251" width="228" height="30"/>
@@ -110,6 +118,9 @@
                         <viewLayoutGuide key="safeArea" id="UzX-jt-POp"/>
                     </view>
                     <navigationItem key="navigationItem" id="9HX-b1-gGe"/>
+                    <connections>
+                        <outlet property="changeCityTextField" destination="4Yx-a1-gAC" id="yGr-VT-Nlz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zYM-jY-kMA" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="I33-UP-vuR" userLabel="Exit" sceneMemberID="exit"/>

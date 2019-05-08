@@ -8,14 +8,32 @@
 
 import UIKit
 
-class ChangeCityController: UIViewController {
+//Write protocol Declaration
+protocol changeCityDelegate {
+    func userEnteredANewCity(city: String)
+}
+
+class ChangeCityViewController: UIViewController {
+   
+    var delegate: changeCityDelegate?
     
+    @IBOutlet weak var changeCityTextField: UITextField!
     
-    @IBAction func changeCityTextField(_ sender: Any) {
+    @IBAction func backButtom(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
     
     
     @IBAction func getWeatherPressed(_ sender: Any) {
+        
+        
+        let cityName = changeCityTextField.text!
+        
+        delegate?.userEnteredANewCity(city: cityName)
+        
+        dismiss(animated: true, completion: nil)
     }
+    
+    
     
 }

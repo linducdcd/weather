@@ -12,7 +12,7 @@ import Alamofire
 import SwiftyJSON
 
 
-class ViewController: UIViewController, CLLocationManagerDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate, changeCityDelegate {
     
     //MARK: - Constant
     let WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather"
@@ -22,12 +22,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     let weatherDataModel = WeatherDataModel()
     
-    
+    //TODO: segue data
+    var nameCity : String = ""
     
     @IBOutlet weak var temperatureLabal: UILabel!
     @IBOutlet weak var cityLabal: UILabel!
     @IBOutlet weak var weatherIcon: UIImageView!
     
+    @IBAction func switchToCityView(_ sender: Any) {
+        performSegue(withIdentifier: "changCityName", sender: self)
+    }
     
 
     override func viewDidLoad() {
@@ -135,7 +139,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         print(error)
         cityLabal.text = "Location Unavailable"
     }
+    //MARK: - change city delegate method
     
+    func userEnteredANewCity(city: String) {
+        print(city)
+    }
 
+    //Write the prepareForSegue Methode
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "changCityName" {
+            
+           let destinationVC = segue.destination as! ChangeCityViewController
+            
+            destinationVC.delegate = self
+        }
+    }
 }
 
