@@ -28,6 +28,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, changeCityDel
     @IBOutlet weak var temperatureLabal: UILabel!
     @IBOutlet weak var cityLabal: UILabel!
     @IBOutlet weak var weatherIcon: UIImageView!
+    @IBOutlet weak var infoTextField: UILabel!
     
     @IBAction func switchToCityView(_ sender: Any) {
         performSegue(withIdentifier: "changCityName", sender: self)
@@ -37,6 +38,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate, changeCityDel
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        
         //TODO: Set location manager here
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
@@ -69,7 +72,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, changeCityDel
                 self.updateWeatherData(jason: weatherJason)
                 self.updateUIWeatherData()
                 
-                
+                self.infoText()
                 
             } else {
                 
@@ -157,5 +160,76 @@ class ViewController: UIViewController, CLLocationManagerDelegate, changeCityDel
             destinationVC.delegate = self
         }
     }
+    
+    func infoText() {
+        var message = ""
+        let url = URL(string: "http://www.weather-forecast.com/locations/" + cityLabal.text! + "/forecasts/latest")!
+        let request = NSMutableURLRequest(url: url)
+        let task = URLSession.shared.dataTask(with: request as URLRequest) {
+            data, response, error in
+            if error != nil {
+                
+                
+                
+                print("dataString: \(error)")
+                
+            } else {
+                
+                if let unwrappedData = data {
+                    
+                    let dataString = NSString(data: unwrappedData, encoding: String.Encoding.utf8.rawValue)
+                    
+                    var stringSeparator = "</span><p class=\"b-forecast__table-description-content\"><span class=\"phrase\">"
+                    if let contentArray = dataString?.components(separatedBy: stringSeparator) {
+                        
+                        if  contentArray.count > 0 {
+                            
+                            stringSeparator = "</span>"
+                            
+                             let newContentArray = contentArray[1].components(separatedBy: stringSeparator)
+                                
+                                if newContentArray.count > 0 {
+                                    
+                                    message = newContentArray[0].replacingOccurrences(of: "&deg;C", with: "°C")
+                                    
+                                    print(message)
+                                
+                                
+                            }
+                            
+                        }
+                       
+                        
+                        
+                    }
+                    
+                }
+            }
+            
+            if message == "" {
+                
+                message = "The weather there couldn't be found. please try again."
+                
+            }
+            DispatchQueue.main.sync(execute: {
+                self.infoTextField.text = message
+            })
+        }
+        
+        task.resume()
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
+
 
